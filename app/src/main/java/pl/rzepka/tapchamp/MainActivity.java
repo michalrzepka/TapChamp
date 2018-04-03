@@ -30,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Artist artist = (Artist) listView.getItemAtPosition(position);
-                artistName = artist.getmArtistName().toString();
-                Log.v("Artist Passed", artistName);
-
+                artistName = artist.getmArtistName();
                 Intent albumsIntent = new Intent (MainActivity.this, AlbumActivity.class);
                 albumsIntent.putExtra(ARTIST_NAME, artistName);
                 startActivity(albumsIntent);

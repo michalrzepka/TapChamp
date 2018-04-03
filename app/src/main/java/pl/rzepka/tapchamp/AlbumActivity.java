@@ -9,6 +9,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class AlbumActivity extends AppCompatActivity {
 
@@ -21,16 +23,19 @@ public class AlbumActivity extends AppCompatActivity {
 
         Intent albumsIntent = getIntent();
         artistName = albumsIntent.getStringExtra(MainActivity.ARTIST_NAME);
-
         setTitle(artistName);
 
-        ArrayList<Album> artistAlbums = new ArrayList<Album>();
-
+        ArrayList<Album> artistAlbums = new ArrayList<>();
         for (Artist artist : Library.getLibrary()) {
             if (artist.getmArtistName().equals(artistName)) {
                 artistAlbums = artist.getmAlbums();
             }
         }
+        Collections.sort(artistAlbums, new Comparator<Album>() {
+            public int compare(Album album1, Album album2) {
+                return album1.getmAlbumTitle().compareTo(album2.getmAlbumTitle());
+            }
+        });
 
         AlbumAdapter albumAdapter = new AlbumAdapter(this, artistAlbums);
         final ListView listView = (ListView) findViewById(R.id.list);
@@ -47,10 +52,6 @@ public class AlbumActivity extends AppCompatActivity {
 
     }
 }
-
-
-
-
 
 
 //        Artist artistToFind = new Artist(artistName);

@@ -1,6 +1,8 @@
 package pl.rzepka.tapchamp;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Library {
 
@@ -81,6 +83,14 @@ public class Library {
         artists.get(3).getmAlbums().get(1).addSong(new Song("", "1:00"));
         artists.get(3).getmAlbums().get(1).addSong(new Song("", "1:00"));
         artists.get(3).getmAlbums().get(1).addSong(new Song("", "1:00"));
+
+        Collections.sort(artists, new Comparator<Artist>() {
+            public int compare(Artist artist1, Artist artist2) {
+                return artist1.getmArtistName().compareTo(artist2.getmArtistName());
+            }
+        });
+
+
 
         return artists;
 
