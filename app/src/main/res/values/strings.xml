@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TapChamp Music Player</string>
+    <string name="album_title">%s (%d songs)</string>
+
+</resources>
