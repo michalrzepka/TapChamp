@@ -18,15 +18,12 @@ public class Library {
         String songTitle = song.getmSongTitle();
         if (findArtist(artistName) == null) {
             Library.artists.add(new Artist(artistName));
-            Log.v("added", artistName);
         }
         if (findAlbum(artistName, albumTitle) == null) {
             Library.findArtist(artistName).addAlbum(new Album(albumTitle));
-            Log.v("added", artistName + albumTitle);
         }
         if (findSong(artistName, albumTitle, songTitle) == null) {
             Library.findAlbum(artistName, albumTitle).addSong(song);
-            Log.v("added", artistName + albumTitle + songTitle);
         }
     }
 
@@ -35,7 +32,6 @@ public class Library {
         for (Artist artist : artists) {
             if (artist.getmArtistName().equals(artistName)) {
                 artistFound = artist;
-                Log.v("Something", artistName);
             }
         }
        return artistFound;
