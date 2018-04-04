@@ -27,9 +27,9 @@ public class AlbumAdapter extends ArrayAdapter<Album> {
 
         Album currentAlbum = getItem(position);
 
-        TextView albumTitle = (TextView) listItemView.findViewById(R.id.album_title_text_view);
-        String albumInfo = String.format("%s (%d songs)", currentAlbum.getmAlbumTitle(), currentAlbum.getNumberOfSongs());
-        albumTitle.setText(albumInfo);
+        TextView albumTitleView = (TextView) listItemView.findViewById(R.id.album_title_text_view);
+        String albumTitle = String.format("%s (%d songs)", currentAlbum.getmAlbumTitle(), currentAlbum.getNumberOfSongs());
+        albumTitleView.setText(albumTitle);
 
         return listItemView;
     }

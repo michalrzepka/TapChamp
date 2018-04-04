@@ -26,8 +26,8 @@ public class ArtistAdapter extends ArrayAdapter<Artist> {
 
         Artist currentArtist = getItem(position);
 
-        TextView artistName = (TextView) listItemView.findViewById(R.id.artist_name_text_view);
-        artistName.setText(currentArtist.getmArtistName());
+        TextView artistNameView = (TextView) listItemView.findViewById(R.id.artist_name_text_view);
+        artistNameView.setText(currentArtist.getmArtistName());
 
         return listItemView;
     }

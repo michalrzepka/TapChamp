@@ -12,9 +12,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class AlbumActivity extends AppCompatActivity {
+public class AlbumsActivity extends AppCompatActivity {
 
-    String artistName = "";
+    private String artistName;
+    private String albumTitle;
+    public static final String ARTIST_NAME = "pl.rzepka.tapchamp.ARTIST_NAME";
+    public static final String ALBUM_TITLE = "pl.rzepka.tapchamp.ALBUM_TITLE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +28,8 @@ public class AlbumActivity extends AppCompatActivity {
         artistName = albumsIntent.getStringExtra(MainActivity.ARTIST_NAME);
         setTitle(artistName);
 
-        ArrayList<Album> artistAlbums = new ArrayList<>();
-        for (Artist artist : Library.getLibrary()) {
-            if (artist.getmArtistName().equals(artistName)) {
-                artistAlbums = artist.getmAlbums();
-            }
-        }
+        ArrayList<Album> artistAlbums = Library.findArtist(artistName).getmAlbums();
+
         Collections.sort(artistAlbums, new Comparator<Album>() {
             public int compare(Album album1, Album album2) {
                 return album1.getmAlbumTitle().compareTo(album2.getmAlbumTitle());
@@ -41,27 +40,17 @@ public class AlbumActivity extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(albumAdapter);
 
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Album album = (Album) listView.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "You selected : " + album.getmAlbumTitle(), Toast.LENGTH_SHORT).show();
+                albumTitle = album.getmAlbumTitle();
+                Intent songsIntent = new Intent (AlbumsActivity.this, SongsActivity.class);
+                songsIntent.putExtra(ARTIST_NAME, artistName);
+                songsIntent.putExtra(ALBUM_TITLE, albumTitle);
+                startActivity(songsIntent);
             }
         });
 
     }
 }
-
-
-//        Artist artistToFind = new Artist(artistName);
-//        Log.v("find1", Library.getLibrary().get(0).toString());
-//        Log.v("find2", artistToFind.toString());
-//        int artistId = Library.getLibrary().indexOf(artistToFind);
-//        Log.v("find3", artistId + "");
-//        Artist artist = Library.getLibrary().get(artistId);
-//        ArrayList<Album> artistAlbums = artist.getmAlbums();
-//        return artistAlbums;
-//    }
-//
-//}
