@@ -20,12 +20,12 @@ public class SongsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_albums);
+        setContentView(R.layout.activity_songs);
 
         Intent songsIntent = getIntent();
         artistName = songsIntent.getStringExtra(AlbumsActivity.ARTIST_NAME);
         albumTitle = songsIntent.getStringExtra(AlbumsActivity.ALBUM_TITLE);
-        setTitle(albumTitle);
+        setTitle(albumTitle + " - " + artistName);
 
         ArrayList<Song> albumSongs = Library.findAlbum(artistName, albumTitle).getmSongs();
 
@@ -38,7 +38,9 @@ public class SongsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Song song = (Song) listView.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "You selected : " + song.getmSongTitle(), Toast.LENGTH_SHORT).show();
+                Playlist.playlist.add(song);
+                Intent playingIntent = new Intent (SongsActivity.this, NowPlayingActivity.class);
+                startActivity(playingIntent);
             }
         });
 

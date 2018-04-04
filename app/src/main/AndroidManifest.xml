@@ -20,6 +20,9 @@
             android:label=""/>
         <activity android:name=".SongsActivity"
             android:label=""/>
+        <activity android:name=".NowPlayingActivity"
+            android:label=""
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

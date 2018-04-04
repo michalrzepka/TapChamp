@@ -27,4 +27,12 @@ public class Album {
         int songsNumber = mSongs.size();
         return songsNumber;
     }
+
+    public int getAlbumDuration() {
+        int albumDuration = 0;
+        for(Song song : mSongs) {
+            albumDuration += song.getmDuration();
+        }
+        return albumDuration;
+    }
 }

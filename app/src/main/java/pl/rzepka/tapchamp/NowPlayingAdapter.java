@@ -1,6 +1,7 @@
 package pl.rzepka.tapchamp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
-public class SongAdapter extends ArrayAdapter<Song> {
+public class NowPlayingAdapter extends ArrayAdapter<Song> {
 
-    public SongAdapter(Activity context, ArrayList<Song> songs) {
+    public NowPlayingAdapter(Activity context, LinkedList<Song> songs) {
         super(context, 0, songs);
     }
 
@@ -21,14 +23,10 @@ public class SongAdapter extends ArrayAdapter<Song> {
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.song_item, parent, false);
+                    R.layout.playlist_item, parent, false);
         }
 
-        Song currentSong = getItem(position);
-
-        TextView trackNumberView = (TextView) listItemView.findViewById(R.id.track_number_text_view);
-        String trackNumber = position+1 + ".";
-        trackNumberView.setText(trackNumber);
+        final Song currentSong = getItem(position);
 
         TextView songTitleView = (TextView) listItemView.findViewById(R.id.song_title_text_view);
         String songTitle = currentSong.getmSongTitle();
@@ -38,11 +36,22 @@ public class SongAdapter extends ArrayAdapter<Song> {
         String songDuration = String.format("(%02d:%02d)", currentSong.getmDuration() / 60, currentSong.getmDuration() % 60);
         songDurationView.setText(songDuration);
 
-        TextView albumArtistView = (TextView) listItemView.findViewById(R.id.album_artist_text_view);
+        TextView albumTitleView = (TextView) listItemView.findViewById(R.id.album_title_text_view);
         String albumTitle = currentSong.getmAlbumTitle();
+        albumTitleView.setText(albumTitle);
+
+        TextView artistNameView = (TextView) listItemView.findViewById(R.id.artist_name_text_view);
         String artistName = currentSong.getmArtistName();
-        String albumArtist = String.format("(%s – %s)", albumTitle, artistName);
-        albumArtistView.setText(albumArtist);
+        artistNameView.setText(artistName);
+
+        TextView removeFromPlaylist = (TextView)listItemView.findViewById(R.id.remove_from_playlist_button);
+        removeFromPlaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Playlist.removeSong(currentSong);
+                notifyDataSetChanged();
+            }
+        });
 
         return listItemView;
     }

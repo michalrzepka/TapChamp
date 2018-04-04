@@ -65,14 +65,30 @@ public class Library {
         new Song("Hity na czasie", "Esende Mylffon", "Tede", 222);
         new Song("Glokk", "Esende Mylffon", "Tede", 300);
         new Song("Airmax Classic", "Esende Mylffon", "Tede", 274);
+        new Song("Zamknij pysk!", "Esende Mylffon", "Tede", 256);
+        new Song("Chory pastor", "Esende Mylffon", "Tede", 255);
+        new Song("Łap tego loopa", "Esende Mylffon", "Tede", 216);
+        new Song("21 palec", "Esende Mylffon", "Tede", 220);
+        new Song("Zdzi-ro", "Esende Mylffon", "Tede", 220);
+        new Song("Nic za darmo", "Esende Mylffon", "Tede", 254);
+        new Song("Jakby jutra miało nie być", "Esende Mylffon", "Tede", 296);
+        new Song("Esende Mylffon", "Esende Mylffon", "Tede", 310);
+        new Song("To jeszcze nie koniec", "Esende Mylffon", "Tede", 221);
 
-        new Song("#1", "Notes", "Tede", 0);
-        new Song("#2", "Notes", "Tede", 0);
-        new Song("#3", "Notes", "Tede", 0);
-        new Song("#4", "Notes", "Tede", 0);
-        new Song("#5", "Notes", "Tede", 0);
-        new Song("#6", "Notes", "Tede", 0);
-        new Song("#7", "Notes", "Tede", 0);
+
+
+        new Song("Lorem ipsum", "Notes", "Tede", 123);
+        new Song("Doler sit amet", "Notes", "Tede", 456);
+        new Song("Absrudui", "Notes", "Tede", 654);
+        new Song("Purusunu dadu", "Notes", "Tede", 765);
+        new Song("Ryubudi", "Notes", "Tede", 223);
+        new Song("Pariabafo", "Notes", "Tede", 434);
+        new Song("Rutiuid", "Notes", "Tede", 198);
+        new Song("Raproti rosir masir", "Notes", "Tede", 500);
+        new Song("Proti nund osop", "Notes", "Tede", 324);
+        new Song("Partim guhnyi", "Notes", "Tede", 299);
+        new Song("Osodig soif dusop", "Notes", "Tede", 198);
+        new Song("Abuidfo", "Notes", "Tede", 333);
 
         new Song("#1", "S.P.O.R.T.", "Tede", 0);
         new Song("#2", "S.P.O.R.T.", "Tede", 0);
@@ -119,6 +135,8 @@ public class Library {
         new Song("#5", "Master of Puppets", "Metallica", 0);
         new Song("#6", "Master of Puppets", "Metallica", 0);
         new Song("#7", "Master of Puppets", "Metallica", 0);
+
+        new Song("Powiedz", "Ad. 4", "Ich Troje", 999);
     }
 
 }
