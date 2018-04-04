@@ -8,6 +8,61 @@ public class Library {
 
     private static ArrayList<Artist> artists = new ArrayList<>();
 
+    public static ArrayList<Artist> getArtists() {
+        return artists;
+    }
+
+    public static void addToLibrary(Song song) {
+        String artistName = song.getmArtistName();
+        String albumTitle = song.getmAlbumTitle();
+        String songTitle = song.getmSongTitle();
+        if (findArtist(artistName) == null) {
+            Library.artists.add(new Artist(artistName));
+            Log.v("added", artistName);
+        }
+        if (findAlbum(artistName, albumTitle) == null) {
+            Library.findArtist(artistName).addAlbum(new Album(albumTitle));
+            Log.v("added", artistName + albumTitle);
+        }
+        if (findSong(artistName, albumTitle, songTitle) == null) {
+            Library.findAlbum(artistName, albumTitle).addSong(song);
+            Log.v("added", artistName + albumTitle + songTitle);
+        }
+    }
+
+    public static Artist findArtist(String artistName) {
+        Artist artistFound = null;
+        for (Artist artist : artists) {
+            if (artist.getmArtistName().equals(artistName)) {
+                artistFound = artist;
+                Log.v("Something", artistName);
+            }
+        }
+       return artistFound;
+    }
+
+    public static Album findAlbum(String artistName, String albumTitle) {
+        Album albumFound = null;
+        ArrayList<Album> artistAlbums = findArtist(artistName).getmAlbums();
+        for (Album album : artistAlbums) {
+            if (album.getmAlbumTitle().equals(albumTitle)) {
+                albumFound = album;
+            }
+        }
+        return albumFound;
+    }
+
+    private static Song findSong(String artistName, String albumTitle, String songTitle) {
+        Song songFound = null;
+        ArrayList<Song> album = findAlbum(artistName, albumTitle).getmSongs();
+        for (Song song : album) {
+            if (song.getmSongTitle().equals(songTitle)) {
+                songFound = song;
+            }
+        }
+        return songFound;
+    }
+
     public static void populateLibrary() {
         new Song("Wstępizille", "Esende Mylffon", "Tede", 112);
         new Song("Blask", "Esende Mylffon", "Tede", 244);
@@ -68,61 +123,6 @@ public class Library {
         new Song("#5", "Master of Puppets", "Metallica", 0);
         new Song("#6", "Master of Puppets", "Metallica", 0);
         new Song("#7", "Master of Puppets", "Metallica", 0);
-    }
-
-    public static ArrayList<Artist> getArtists() {
-        return artists;
-    }
-
-    public static void addToLibrary(Song song) {
-        String artistName = song.getmArtistName();
-        String albumTitle = song.getmAlbumTitle();
-        String songTitle = song.getmSongTitle();
-        if (findArtist(artistName) == null) {
-            Library.artists.add(new Artist(artistName));
-            Log.v("added", artistName);
-        }
-        if (findAlbum(artistName, albumTitle) == null) {
-            Library.findArtist(artistName).addAlbum(new Album(albumTitle));
-            Log.v("added", artistName + albumTitle);
-        }
-        if (findSong(artistName, albumTitle, songTitle) == null) {
-            Library.findAlbum(artistName, albumTitle).addSong(song);
-            Log.v("added", artistName + albumTitle + songTitle);
-        }
-    }
-
-    public static Artist findArtist(String artistName) {
-        Artist artistFound = null;
-        for (Artist artist : artists) {
-            if (artist.getmArtistName().equals(artistName)) {
-                artistFound = artist;
-                Log.v("Something", artistName);
-            }
-        }
-       return artistFound;
-    }
-
-    public static Album findAlbum(String artistName, String albumTitle) {
-        Album albumFound = null;
-        ArrayList<Album> artistAlbums = findArtist(artistName).getmAlbums();
-        for (Album album : artistAlbums) {
-            if (album.getmAlbumTitle().equals(albumTitle)) {
-                albumFound = album;
-            }
-        }
-        return albumFound;
-    }
-
-    private static Song findSong(String artistName, String albumTitle, String songTitle) {
-        Song songFound = null;
-        ArrayList<Song> album = findAlbum(artistName, albumTitle).getmSongs();
-        for (Song song : album) {
-            if (song.getmSongTitle().equals(songTitle)) {
-                songFound = song;
-            }
-        }
-        return songFound;
     }
 
 }
