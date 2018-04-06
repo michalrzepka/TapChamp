@@ -14,7 +14,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="add_to_playlist">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        android:id="@+id/add_to_playlist_button"
+        android:src="@drawable/add"
     </style>
 
 </resources>

@@ -5,23 +5,71 @@
     android:orientation="vertical"
     tools:context=".NowPlayingActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center">
+
         <ImageView
+            android:layout_weight="1"
+            android:id="@+id/prev_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/prev"
+            android:scaleType="centerInside"/>
+
+        <ImageView
+            android:layout_weight="1"
+            android:id="@+id/now_playing_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:src="@drawable/cover"/>
-    </RelativeLayout>
+
+        <ImageView
+            android:layout_weight="1"
+            android:id="@+id/next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/next"
+            android:scaleType="centerInside"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/now_playing_title_text_view"
+            android:text="Title"
+            style="@style/title"/>
+        <TextView
+            android:id="@+id/now_playing_album_artist_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Album Title - Artist Name"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#c0c0c0"/>
+
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.75"
         android:orientation="vertical"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"/>

@@ -16,6 +16,8 @@ public class SongsActivity extends AppCompatActivity {
 
     private String artistName;
     private String albumTitle;
+    public static final String ARTIST_NAME = "pl.rzepka.tapchamp.ARTIST_NAME";
+    public static final String ALBUM_TITLE = "pl.rzepka.tapchamp.ALBUM_TITLE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +40,9 @@ public class SongsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Song song = (Song) listView.getItemAtPosition(position);
-                Playlist.playlist.add(song);
-                Intent playingIntent = new Intent (SongsActivity.this, NowPlayingActivity.class);
-                startActivity(playingIntent);
+                Playlist.playlist.addFirst(song);
+                Intent playlistIntent = new Intent (SongsActivity.this, NowPlayingActivity.class);
+                startActivity(playlistIntent);
             }
         });
 

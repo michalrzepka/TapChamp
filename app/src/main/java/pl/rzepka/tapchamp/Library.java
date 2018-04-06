@@ -1,7 +1,5 @@
 package pl.rzepka.tapchamp;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 public class Library {
@@ -20,7 +18,7 @@ public class Library {
             Library.artists.add(new Artist(artistName));
         }
         if (findAlbum(artistName, albumTitle) == null) {
-            Library.findArtist(artistName).addAlbum(new Album(albumTitle));
+            Library.findArtist(artistName).addAlbum(new Album(albumTitle, artistName));
         }
         if (findSong(artistName, albumTitle, songTitle) == null) {
             Library.findAlbum(artistName, albumTitle).addSong(song);
@@ -90,14 +88,14 @@ public class Library {
         new Song("Osodig soif dusop", "Notes", "Tede", 198);
         new Song("Abuidfo", "Notes", "Tede", 333);
 
-        new Song("#1", "S.P.O.R.T.", "Tede", 0);
-        new Song("#2", "S.P.O.R.T.", "Tede", 0);
-        new Song("#3", "S.P.O.R.T.", "Tede", 0);
-        new Song("#4", "S.P.O.R.T.", "Tede", 0);
-        new Song("#5", "S.P.O.R.T.", "Tede", 0);
-        new Song("#6", "S.P.O.R.T.", "Tede", 0);
-        new Song("#7", "S.P.O.R.T.", "Tede", 0);
-        new Song("#8", "S.P.O.R.T.", "Tede", 0);
+        new Song("#1", "Ścieżka dzwiękowa", "Tede", 222);
+        new Song("#2", "Ścieżka dzwiękowa", "Tede", 333);
+        new Song("#3", "Ścieżka dzwiękowa", "Tede", 533);
+        new Song("#4", "Ścieżka dzwiękowa", "Tede", 234);
+        new Song("#5", "Ścieżka dzwiękowa", "Tede", 543);
+        new Song("#6", "Ścieżka dzwiękowa", "Tede", 432);
+        new Song("#7", "Ścieżka dzwiękowa", "Tede", 213);
+        new Song("#8", "Ścieżka dzwiękowa", "Tede", 234);
 
         new Song("Help!", "Help!", "The Beatles", 138);
         new Song("The Night Before!", "Help!", "The Beatles", 154);
@@ -137,6 +135,7 @@ public class Library {
         new Song("#7", "Master of Puppets", "Metallica", 0);
 
         new Song("Powiedz", "Ad. 4", "Ich Troje", 999);
+
     }
 
 }

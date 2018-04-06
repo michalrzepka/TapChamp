@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,10 +45,11 @@ public class NowPlayingAdapter extends ArrayAdapter<Song> {
         String artistName = currentSong.getmArtistName();
         artistNameView.setText(artistName);
 
-        TextView removeFromPlaylist = (TextView)listItemView.findViewById(R.id.remove_from_playlist_button);
+        ImageView removeFromPlaylist = (ImageView)listItemView.findViewById(R.id.remove_from_playlist_button);
         removeFromPlaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NowPlayingActivity.removeSongFromIterator(currentSong);
                 Playlist.removeSong(currentSong);
                 notifyDataSetChanged();
             }

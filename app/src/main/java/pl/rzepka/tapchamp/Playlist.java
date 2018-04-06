@@ -15,6 +15,16 @@ public class Playlist {
         }
     }
 
+    public static void addArtist(Artist artist) {
+        for(Album album : artist.getmAlbums()) {
+            addAlbum(album);
+        }
+    }
+
+    public static void playNext(Song song) {
+        playlist.add(0, song);
+    }
+
     public static void removeSong(Song song) {
         playlist.remove(song);
     }

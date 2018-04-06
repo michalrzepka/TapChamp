@@ -21,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Library.populateLibrary();
+        Library.findAlbum("Tede", "Esende Mylffon").setmAlbumCover(R.drawable.tede_essende_mylffon);
+        Library.findAlbum("Tede", "Notes").setmAlbumCover(R.drawable.tede_notes);
+        Library.findAlbum("Tede", "Ścieżka dzwiękowa").setmAlbumCover(R.drawable.tede_sciezka_dzwiekowa);
+        Library.findAlbum("The Beatles", "Help!").setmAlbumCover(R.drawable.the_beatles_help);
+        Library.findAlbum("The Beatles", "Let It Be").setmAlbumCover(R.drawable.the_beatles_let_it_be);
+        Library.findAlbum("The Beatles", "Abbey Road").setmAlbumCover(R.drawable.the_beatles_1);
+        Library.findAlbum("Metallica", "Kill 'Em All").setmAlbumCover(R.drawable.metallica_kill_em_all);
+        Library.findAlbum("Metallica", "Master of Puppets").setmAlbumCover(R.drawable.metallica_master_of_puppets);
+        Library.findAlbum("Ich Troje", "Ad. 4").setmAlbumCover(R.drawable.ich_troje_ad4);
 
         Collections.sort(Library.getArtists(), new Comparator<Artist>() {
             public int compare(Artist artist1, Artist artist2) {
@@ -46,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), NowPlayingActivity.class));
+        finish();
 
+    }
 
 }

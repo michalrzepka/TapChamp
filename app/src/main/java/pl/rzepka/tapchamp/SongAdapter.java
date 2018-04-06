@@ -41,7 +41,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
         TextView albumArtistView = (TextView) listItemView.findViewById(R.id.album_artist_text_view);
         String albumTitle = currentSong.getmAlbumTitle();
         String artistName = currentSong.getmArtistName();
-        String albumArtist = String.format("(%s – %s)", albumTitle, artistName);
+        String albumArtist = String.format("%s – %s", albumTitle, artistName);
         albumArtistView.setText(albumArtist);
 
         return listItemView;

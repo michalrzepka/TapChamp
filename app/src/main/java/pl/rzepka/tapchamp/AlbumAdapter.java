@@ -3,15 +3,19 @@ package pl.rzepka.tapchamp;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class AlbumAdapter extends ArrayAdapter<Album> {
+
+    public static final String ARTIST_NAME = "pl.rzepka.tapchamp.ARTIST_NAME";
 
     public AlbumAdapter(Activity context, ArrayList<Album> albums) {
         super(context, 0, albums);
@@ -28,6 +32,8 @@ public class AlbumAdapter extends ArrayAdapter<Album> {
 
         final Album currentAlbum = getItem(position);
 
+        ImageView albumCoverView = (ImageView) listItemView.findViewById(R.id.album_cover);
+        albumCoverView.setImageResource(currentAlbum.getmAlbumCover());
         TextView albumTitleView = (TextView) listItemView.findViewById(R.id.album_title_text_view);
         String albumTitle = currentAlbum.getmAlbumTitle();
         albumTitleView.setText(albumTitle);
@@ -37,7 +43,19 @@ public class AlbumAdapter extends ArrayAdapter<Album> {
         String albumInfo = String.format("(%s – %d tracks)", albumDuration, trackCount);
         albumInfoView.setText(albumInfo);
 
-        TextView addToPlaylist = (TextView)listItemView.findViewById(R.id.add_to_playlist_button);
+
+        ImageView playAlbumView = (ImageView) listItemView.findViewById(R.id.play_album_button);
+        playAlbumView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Playlist.playlist.clear();
+                Playlist.addAlbum(currentAlbum);
+                Intent playlistIntent = new Intent (view.getContext(), NowPlayingActivity.class);
+                 view.getContext().startActivity(playlistIntent);
+            }
+        });
+
+        ImageView addToPlaylist = (ImageView) listItemView.findViewById(R.id.add_to_playlist_button);
         addToPlaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
