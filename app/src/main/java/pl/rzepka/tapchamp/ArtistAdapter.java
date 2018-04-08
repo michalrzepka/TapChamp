@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,9 @@ public class ArtistAdapter extends ArrayAdapter<Artist> {
             public void onClick(View view) {
                 Playlist.playlist.clear();
                 Playlist.addArtist(currentArtist);
-                Intent playlistIntent = new Intent (view.getContext(), NowPlayingActivity.class);
+                NowPlayingActivity.nowPlayingSong = null; //set now playing song to null so first song from list we are adding will be playing
+                Toast.makeText(getContext(), "Now playing " + currentArtist.getmArtistName(), Toast.LENGTH_SHORT).show();
+                Intent playlistIntent = new Intent(view.getContext(), NowPlayingActivity.class);
                 view.getContext().startActivity(playlistIntent);
             }
         });
@@ -47,7 +50,8 @@ public class ArtistAdapter extends ArrayAdapter<Artist> {
             @Override
             public void onClick(View view) {
                 Playlist.addArtist(currentArtist);
-                Intent playlistIntent = new Intent (view.getContext(), NowPlayingActivity.class);
+                Toast.makeText(getContext(), currentArtist.getmArtistName() + " added to playlist", Toast.LENGTH_SHORT).show();
+                Intent playlistIntent = new Intent(view.getContext(), NowPlayingActivity.class);
                 view.getContext().startActivity(playlistIntent);
             }
         });

@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".MainActivity"
             android:label="Artists">
             <intent-filter>
@@ -16,13 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlbumsActivity"
-            android:label=""/>
-        <activity android:name=".SongsActivity"
-            android:label=""/>
-        <activity android:name=".NowPlayingActivity"
-            android:label=""
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".AlbumsActivity" />
+        <activity android:name=".SongsActivity" />
+        <activity android:name=".NowPlayingActivity" />
     </application>
 
 </manifest>

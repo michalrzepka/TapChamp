@@ -8,13 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class NowPlayingAdapter extends ArrayAdapter<Song> {
 
-    public NowPlayingAdapter(Activity context, LinkedList<Song> songs) {
+    public NowPlayingAdapter(Activity context, ArrayList<Song> songs) {
         super(context, 0, songs);
     }
 
@@ -45,13 +46,16 @@ public class NowPlayingAdapter extends ArrayAdapter<Song> {
         String artistName = currentSong.getmArtistName();
         artistNameView.setText(artistName);
 
-        ImageView removeFromPlaylist = (ImageView)listItemView.findViewById(R.id.remove_from_playlist_button);
+        ImageView removeFromPlaylist = (ImageView) listItemView.findViewById(R.id.remove_from_playlist_button);
         removeFromPlaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NowPlayingActivity.removeSongFromIterator(currentSong);
-                Playlist.removeSong(currentSong);
-                notifyDataSetChanged();
+                if (currentSong != NowPlayingActivity.nowPlayingSong) {
+                    Playlist.removeSong(currentSong);
+                    notifyDataSetChanged();
+                } else {
+                    Toast.makeText(getContext(), "Song is playing now, can not delete", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

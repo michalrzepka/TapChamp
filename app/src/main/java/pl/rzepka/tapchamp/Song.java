@@ -7,6 +7,8 @@ public class Song {
     private String mArtistName;
     private int mDuration;
 
+    // song constructor that adds song to library after making new object
+
     public Song(String mSongTitle, String mAlbumTitle, String mArtistName, int mDuration) {
         this.mSongTitle = mSongTitle;
         this.mAlbumTitle = mAlbumTitle;

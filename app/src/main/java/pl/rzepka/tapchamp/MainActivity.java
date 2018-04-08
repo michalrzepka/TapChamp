@@ -3,6 +3,9 @@ package pl.rzepka.tapchamp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,6 +15,8 @@ import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
+    // variables for intent putExtra
+
     private String artistName;
     public static final String ARTIST_NAME = "pl.rzepka.tapchamp.ARTIST_NAME";
 
@@ -19,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        //initiates library and adds covers to albums - probably covers should be covered in constructor but I wrote that part later and din't want to rebuild established classes
 
         Library.populateLibrary();
         Library.findAlbum("Tede", "Esende Mylffon").setmAlbumCover(R.drawable.tede_essende_mylffon);
@@ -31,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         Library.findAlbum("Metallica", "Master of Puppets").setmAlbumCover(R.drawable.metallica_master_of_puppets);
         Library.findAlbum("Ich Troje", "Ad. 4").setmAlbumCover(R.drawable.ich_troje_ad4);
 
+        // sort artist alphabetically
+
         Collections.sort(Library.getArtists(), new Comparator<Artist>() {
             public int compare(Artist artist1, Artist artist2) {
                 return artist1.getmArtistName().compareTo(artist2.getmArtistName());
@@ -40,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         ArtistAdapter artistAdapter = new ArtistAdapter(this, Library.getArtists());
         final ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(artistAdapter);
-
 
         listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
@@ -55,13 +66,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), NowPlayingActivity.class));
-        finish();
+    // toolbar icon that takes user to now playing section
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.now_playing:
+                Intent nowPlayingIntent = new Intent(this, NowPlayingActivity.class);
+                this.startActivity(nowPlayingIntent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
 }

@@ -10,12 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class AlbumAdapter extends ArrayAdapter<Album> {
-
-    public static final String ARTIST_NAME = "pl.rzepka.tapchamp.ARTIST_NAME";
 
     public AlbumAdapter(Activity context, ArrayList<Album> albums) {
         super(context, 0, albums);
@@ -43,15 +42,16 @@ public class AlbumAdapter extends ArrayAdapter<Album> {
         String albumInfo = String.format("(%s – %d tracks)", albumDuration, trackCount);
         albumInfoView.setText(albumInfo);
 
-
         ImageView playAlbumView = (ImageView) listItemView.findViewById(R.id.play_album_button);
         playAlbumView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Playlist.playlist.clear();
                 Playlist.addAlbum(currentAlbum);
-                Intent playlistIntent = new Intent (view.getContext(), NowPlayingActivity.class);
-                 view.getContext().startActivity(playlistIntent);
+                NowPlayingActivity.nowPlayingSong = null;
+                Toast.makeText(getContext(), "Now playing " + currentAlbum.getmAlbumTitle(), Toast.LENGTH_SHORT).show();
+                Intent playlistIntent = new Intent(view.getContext(), NowPlayingActivity.class);
+                view.getContext().startActivity(playlistIntent);
             }
         });
 
@@ -60,7 +60,8 @@ public class AlbumAdapter extends ArrayAdapter<Album> {
             @Override
             public void onClick(View view) {
                 Playlist.addAlbum(currentAlbum);
-                Intent playlistIntent = new Intent (view.getContext(), NowPlayingActivity.class);
+                Toast.makeText(getContext(), currentAlbum.getmAlbumTitle() + " added to playlist", Toast.LENGTH_SHORT).show();
+                Intent playlistIntent = new Intent(view.getContext(), NowPlayingActivity.class);
                 view.getContext().startActivity(playlistIntent);
             }
         });

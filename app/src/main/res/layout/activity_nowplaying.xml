@@ -9,59 +9,61 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageView
-            android:layout_weight="1"
             android:id="@+id/prev_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/prev"
-            android:scaleType="centerInside"/>
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/prev" />
 
         <ImageView
-            android:layout_weight="1"
             android:id="@+id/now_playing_cover"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="8dp"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:layout_weight="1"
             android:paddingBottom="8dp"
-            android:src="@drawable/cover"/>
+            android:paddingTop="8dp"
+            android:src="@drawable/cover" />
 
         <ImageView
-            android:layout_weight="1"
             android:id="@+id/next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginRight="16dp"
-            android:src="@drawable/next"
-            android:scaleType="centerInside"/>
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/next" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/now_playing_title_text_view"
-            android:text="Title"
-            style="@style/title"/>
+            style="@style/title"
+            android:text="Playlist empty" />
+
         <TextView
             android:id="@+id/now_playing_album_artist_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Album Title - Artist Name"/>
+            android:text="Pres back to go to library and add music" />
     </LinearLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
-        android:background="#c0c0c0"/>
+        android:background="#c0c0c0" />
 
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -69,9 +71,9 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.75"
-        android:orientation="vertical"
+        android:layout_weight="0.9"
         android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false"/>
+        android:headerDividersEnabled="false"
+        android:orientation="vertical" />
 
 </LinearLayout>

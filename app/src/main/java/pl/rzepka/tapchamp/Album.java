@@ -1,7 +1,5 @@
 package pl.rzepka.tapchamp;
 
-import android.media.Image;
-
 import java.util.ArrayList;
 
 public class Album {
@@ -14,7 +12,6 @@ public class Album {
     public Album(String mAlbumTitle, String mAlbumArtist) {
         this.mAlbumTitle = mAlbumTitle;
         this.mAlbumArtist = mAlbumArtist;
-
     }
 
     public void addSong(Song song) {
@@ -25,17 +22,12 @@ public class Album {
         return mAlbumTitle;
     }
 
-    public String getmAlbumArtist() {
-        return mAlbumArtist;
-    }
-
     public ArrayList<Song> getmSongs() {
         return mSongs;
     }
 
     public int getNumberOfSongs() {
-        int songsNumber = mSongs.size();
-        return songsNumber;
+        return mSongs.size();
     }
 
     public int getmAlbumCover() {
@@ -48,7 +40,7 @@ public class Album {
 
     public int getAlbumDuration() {
         int albumDuration = 0;
-        for(Song song : mSongs) {
+        for (Song song : mSongs) {
             albumDuration += song.getmDuration();
         }
         return albumDuration;

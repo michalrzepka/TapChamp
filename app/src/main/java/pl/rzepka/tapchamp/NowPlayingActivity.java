@@ -1,8 +1,5 @@
 package pl.rzepka.tapchamp;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,28 +7,29 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
 
 public class NowPlayingActivity extends AppCompatActivity {
 
-    static LinkedList<Song> nowPlaying = Playlist.playlist;
-    static ListIterator<Song> playListIterator = nowPlaying.listIterator();
-    boolean goingForward = true;
+    static ArrayList<Song> nowPlayingList = Playlist.playlist;
+    static Song nowPlayingSong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nowplaying);
 
-        if (nowPlaying.size() != 0) {
-            playNow(playListIterator.next());
+        //play first song on the list when entering activity for the first time - if playlist not empty
+        //play last playing song when reentering activty
+
+        if (nowPlayingList.size() != 0 && nowPlayingSong == null) { //play first song when entering activity if playlist not empty
+            playNow(nowPlayingList.get(0));
+        } else if (nowPlayingSong != null) {
+            playNow(nowPlayingSong);
         }
 
-        NowPlayingAdapter playlistAdapter = new NowPlayingAdapter(this, nowPlaying);
+        NowPlayingAdapter playlistAdapter = new NowPlayingAdapter(this, nowPlayingList);
         final ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(playlistAdapter);
 
@@ -41,14 +39,6 @@ public class NowPlayingActivity extends AppCompatActivity {
                 Song song = (Song) listView.getItemAtPosition(position);
                 playNow(song);
 
-                // sets iterator to the correct position after tapping song on the list so the prev/next button will work correctly
-                while(playListIterator.hasNext() && playListIterator.next() != song) {
-                    playListIterator.next();
-                    goingForward = false;
-                }
-                while (playListIterator.hasPrevious() && playListIterator.previous() != song) {
-                    playListIterator.previous();
-                }
             }
         });
 
@@ -70,17 +60,7 @@ public class NowPlayingActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-    }
-
-    public static void removeSongFromIterator(Song song) {
-        while(playListIterator.hasNext() && playListIterator.next() != song) {
-            playListIterator.next();
-        }
-    }
+    // populate main part of the screen with album cover and song detials
 
     private void playNow(Song song) {
         ImageView nowPlayingCoverView = (ImageView) findViewById(R.id.now_playing_cover);
@@ -91,34 +71,31 @@ public class NowPlayingActivity extends AppCompatActivity {
         TextView nowPlayingAlbumView = (TextView) findViewById(R.id.now_playing_album_artist_text_view);
         String albumArtist = String.format("%s – %s", song.getmAlbumTitle(), song.getmArtistName());
         nowPlayingAlbumView.setText(albumArtist);
+        nowPlayingSong = song;
     }
 
-    private void playNext() {
-        if (!goingForward) {
-            if (playListIterator.hasNext()) {
-                playListIterator.next();
+    // playNext and playPrev looks for currently playing song and then go +1/-1 in Array List, exceptions added so
+    // list will loop when going prev/next on first/last item; also checks if playlist is not empty to prevent exception throw
+
+    public void playNext() {
+        if (nowPlayingList.size() != 0) {
+            int nextToPlay = nowPlayingList.indexOf(nowPlayingSong) + 1;
+            if (nextToPlay < nowPlayingList.size()) {
+                playNow(nowPlayingList.get(nextToPlay));
+            } else {
+                playNow(nowPlayingList.get(0));
             }
-            goingForward = true;
-        }
-        if (playListIterator.hasNext()) {
-            playNow(playListIterator.next());
-        } else {
-            playListIterator.previous();
-            playNow(playListIterator.next());
         }
     }
 
-    private void playPrev() {
-        if (goingForward) {
-            if (playListIterator.hasPrevious()) {
-                playListIterator.previous();
+    public void playPrev() {
+        if (nowPlayingList.size() != 0) {
+            int prevToPlay = nowPlayingList.indexOf(nowPlayingSong) - 1;
+            if (prevToPlay >= 0) {
+                playNow(nowPlayingList.get(prevToPlay));
+            } else {
+                playNow(nowPlayingList.get(nowPlayingList.size() - 1));
             }
-            goingForward = false;
-        }
-        if (playListIterator.hasPrevious()) {
-            playNow(playListIterator.previous());
-        } else {
-            playNow(playListIterator.next());
         }
     }
 }

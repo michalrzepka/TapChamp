@@ -24,4 +24,8 @@
         android:src="@drawable/add"
     </style>
 
+    <style name="toolbar" parent="@style/Base.TextAppearance.AppCompat.Title">
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>
